@@ -1,0 +1,25 @@
+name: "Jobs concatenados"
+
+on:
+    push:
+        branches: ["main"]
+
+jobs:
+    first_job:
+        runs-on: ubuntu-latest
+        
+        env:
+            PITU: Danna Juliette
+
+        steps:
+            - name: Bonjour le monde
+                run: echo "Bonjour le monde $PITU"
+
+    second_job:
+        if: ${{ github.ref == 'refs/heads/main'}}
+        needs: first_job
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Bonjour le monde deux
+                run: echo "Bonjour le monde $PITU"
