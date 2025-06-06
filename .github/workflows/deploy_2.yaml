@@ -6,7 +6,7 @@ on:
 
 jobs:
   first_job:
-    name: Environment variable action 
+    name: 0 Environment variable action 
     runs-on: ubuntu-latest
         
     env:
@@ -26,10 +26,13 @@ jobs:
         run: ls -al
 
   second_job:
-    name: Conditional action and Github variables
+    name: 1 Conditional action and Github variables
     if: ${{ github.ref == 'refs/heads/main'}}
     needs: first_job
     runs-on: ubuntu-latest
+
+    outputs:
+      salida: ${{ steps.github_output.outputs.my_variable }}
 
     steps:
       - name: Bonjour le monde deux
@@ -43,11 +46,17 @@ jobs:
         run: echo "${{ steps.github_output.outputs.my_variable }}"
 
   third_job:
-    name: Conditional action and Github variables
+    name: 2 Conditional action and Github variables
     if: ${{ github.ref == 'refs/heads/main'}}
     needs: second_job
     runs-on: ubuntu-latest
 
+    env:
+        OUTPUT_SECOND_JOB: ${{ needs.second_job.outputs.salida }}
+
     steps:
-      - name: Bonjour le monde deux
+      - name: Print output branch name
         run: echo "Bonjour le monde ${{ github.ref }}"
+
+      - name: Print output second job
+        run: echo "Bonjour le monde $OUTPUT_SECOND_JOB"
