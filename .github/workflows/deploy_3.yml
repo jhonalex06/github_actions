@@ -1,0 +1,25 @@
+name: "Jobs concatenados"
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  first_job:
+    name: Artifacts
+    runs-on: ubuntu-latest
+
+    outputs:
+      salida: ${{ steps.github_output.outputs.my_variable }}
+
+    steps:
+      - name: Generate file
+        run: |
+          echo "Bonjour, Je me apple Jhon Galindo, J'ai trente-deux ans et J'adore la programmation" >> test.log
+
+      - name: Load artifact
+        uses: actions/uploadartifact@v4
+        with:
+          name: archivo_pitufina
+          path: test.log
+
