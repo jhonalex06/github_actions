@@ -18,7 +18,7 @@ jobs:
           echo "Bonjour, Je me apple Jhon Galindo, J'ai trente-deux ans et J'adore la programmation" >> test.log
 
       - name: Load artifact
-        uses: actions/uploadartifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: archivo_pitufina
           path: test.log
