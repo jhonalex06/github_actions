@@ -6,7 +6,7 @@ on:
 
 jobs:
   first_job:
-    name: Artifacts
+    name: Load Artifacts
     runs-on: ubuntu-latest
 
     outputs:
@@ -23,3 +23,15 @@ jobs:
           name: archivo_pitufina
           path: test.log
 
+  second_job:
+    name: Download Artifacts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: archivo_pitufina
+
+      - name: Cat file
+        run: cat test.log
