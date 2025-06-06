@@ -6,6 +6,7 @@ on:
 
 jobs:
   first_job:
+    name: Environment variable action
     runs-on: ubuntu-latest
         
     env:
@@ -15,11 +16,21 @@ jobs:
       - name: Bonjour le monde
         run: echo "Bonjour le monde $PITU"
 
+      - name: Working dir
+        run: ls -al
+
+      - name: Action
+        run: actions/checkout@v4
+
+      - name: Working dir after action
+        run: echo "Bonjour le monde $PITU"
+
   second_job:
+    name: Conditional action
     if: ${{ github.ref == 'refs/heads/main'}}
     needs: first_job
     runs-on: ubuntu-latest
 
     steps:
       - name: Bonjour le monde deux
-        run: echo "Bonjour le monde $PITU"
+        run: echo "Bonjour le monde ${{ github.ref }}"
