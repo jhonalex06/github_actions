@@ -1,0 +1,16 @@
+name: "Deploy Github actions"
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy_codigo_facilito:
+    runs_on: ubuntu-latest
+
+    steps:
+      - run: echo "Hola Pitu"
+      - run: echo "How are you?"
+      - run: echo "Je te aime beaucoup"
+      - run: echo "Chao"
+
