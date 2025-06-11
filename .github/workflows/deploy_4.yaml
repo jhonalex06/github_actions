@@ -1,0 +1,18 @@
+name: "Jobs concatenados"
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  first_job:
+    name: Strategy
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        message: ["Bonjour", "Jhon Galindo", "Bootcamp Github Actions"]
+
+    steps:
+      - name: Print message
+        run: echo "${{ matrix.message }}"
